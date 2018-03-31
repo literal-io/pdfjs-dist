@@ -3003,8 +3003,8 @@ exports.GlobalWorkerOptions = GlobalWorkerOptions;
 "use strict";
 
 
-var pdfjsVersion = '2.0.468';
-var pdfjsBuild = '85125965';
+var pdfjsVersion = '2.0.469';
+var pdfjsBuild = 'd22aaaa';
 var pdfjsSharedUtil = __w_pdfjs_require__(0);
 var pdfjsDisplayAPI = __w_pdfjs_require__(117);
 var pdfjsDisplayTextLayer = __w_pdfjs_require__(125);
@@ -3021,14 +3021,14 @@ var pdfjsDisplayAPICompatibility = __w_pdfjs_require__(58);
       return new PDFNodeStream(params);
     });
   } else if (typeof Response !== 'undefined' && 'body' in Response.prototype && typeof ReadableStream !== 'undefined') {
-    var PDFFetchStream = __w_pdfjs_require__(130).PDFFetchStream;
+    var _PDFFetchStream = __w_pdfjs_require__(130).PDFFetchStream;
     pdfjsDisplayAPI.setPDFNetworkStreamFactory(function (params) {
-      return new PDFFetchStream(params);
+      return new _PDFFetchStream(params);
     });
   } else {
-    var PDFNetworkStream = __w_pdfjs_require__(131).PDFNetworkStream;
+    var _PDFNetworkStream = __w_pdfjs_require__(131).PDFNetworkStream;
     pdfjsDisplayAPI.setPDFNetworkStreamFactory(function (params) {
-      return new PDFNetworkStream(params);
+      return new _PDFNetworkStream(params);
     });
   }
 }
@@ -3062,6 +3062,9 @@ exports.LinkTarget = pdfjsDisplayDOMUtils.LinkTarget;
 exports.addLinkAttributes = pdfjsDisplayDOMUtils.addLinkAttributes;
 exports.GlobalWorkerOptions = pdfjsDisplayWorkerOptions.GlobalWorkerOptions;
 exports.apiCompatibilityParams = pdfjsDisplayAPICompatibility.apiCompatibilityParams;
+exports.setPDFNetworkStreamFactory = pdfjsDisplayAPI.setPDFNetworkStreamFactory;
+exports.PDFFetchStream = PDFFetchStream;
+exports.PDFNetworkStream = PDFNetworkStream;
 
 /***/ }),
 /* 61 */
@@ -8437,7 +8440,7 @@ function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
   }
   return worker.messageHandler.sendWithPromise('GetDocRequest', {
     docId: docId,
-    apiVersion: '2.0.468',
+    apiVersion: '2.0.469',
     source: {
       data: source.data,
       url: source.url,
@@ -9855,8 +9858,8 @@ var InternalRenderTask = function InternalRenderTaskClosure() {
 }();
 var version, build;
 {
-  exports.version = version = '2.0.468';
-  exports.build = build = '85125965';
+  exports.version = version = '2.0.469';
+  exports.build = build = 'd22aaaa';
 }
 exports.getDocument = getDocument;
 exports.LoopbackPort = LoopbackPort;
