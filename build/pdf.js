@@ -3384,7 +3384,11 @@ NetworkManager.prototype = {
     pendingRequest.onDone = args.onDone;
     pendingRequest.onError = args.onError;
     pendingRequest.onProgress = args.onProgress;
-    xhr.send(null);
+    try {
+      xhr.send(null);
+    } catch (err) {
+      args.onError(xhr.status);
+    }
     return xhrId;
   },
   onProgress: function NetworkManager_onProgress(xhrId, evt) {
@@ -3767,8 +3771,8 @@ exports.NetworkManager = NetworkManager;
 "use strict";
 
 
-var pdfjsVersion = '2.0.471';
-var pdfjsBuild = 'c3c8935';
+var pdfjsVersion = '2.0.472';
+var pdfjsBuild = '47dcfa3';
 var pdfjsSharedUtil = __w_pdfjs_require__(0);
 var pdfjsDisplayAPI = __w_pdfjs_require__(119);
 var pdfjsDisplayTextLayer = __w_pdfjs_require__(127);
@@ -9204,7 +9208,7 @@ function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
   }
   return worker.messageHandler.sendWithPromise('GetDocRequest', {
     docId: docId,
-    apiVersion: '2.0.471',
+    apiVersion: '2.0.472',
     source: {
       data: source.data,
       url: source.url,
@@ -10622,8 +10626,8 @@ var InternalRenderTask = function InternalRenderTaskClosure() {
 }();
 var version, build;
 {
-  exports.version = version = '2.0.471';
-  exports.build = build = 'c3c8935';
+  exports.version = version = '2.0.472';
+  exports.build = build = '47dcfa3';
 }
 exports.getDocument = getDocument;
 exports.LoopbackPort = LoopbackPort;
