@@ -123,8 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-var pdfjsVersion = '2.1.210';
-var pdfjsBuild = 'a74c5197';
+var pdfjsVersion = '2.1.211';
+var pdfjsBuild = 'f92039ac';
 
 var pdfjsSharedUtil = __w_pdfjs_require__(1);
 
@@ -9908,13 +9908,7 @@ var fakeWorkerFilesLoader = null;
   fakeWorkerFilesLoader = useRequireEnsure ? function () {
     return new Promise(function (resolve, reject) {
       require.ensure([], function () {
-        try {
-          var worker;
-          worker = require('./pdf.worker.js');
-          resolve(worker.WorkerMessageHandler);
-        } catch (ex) {
-          reject(ex);
-        }
+        reject(new Error("Fake worker not supported."));
       }, reject, 'pdfjsWorker');
     });
   } : dynamicLoaderSupported ? function () {
@@ -10108,7 +10102,7 @@ function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
 
   return worker.messageHandler.sendWithPromise('GetDocRequest', {
     docId: docId,
-    apiVersion: '2.1.210',
+    apiVersion: '2.1.211',
     source: {
       data: source.data,
       url: source.url,
@@ -12175,9 +12169,9 @@ var InternalRenderTask = function InternalRenderTaskClosure() {
   return InternalRenderTask;
 }();
 
-var version = '2.1.210';
+var version = '2.1.211';
 exports.version = version;
-var build = 'a74c5197';
+var build = 'f92039ac';
 exports.build = build;
 
 /***/ }),
