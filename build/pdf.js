@@ -123,8 +123,8 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-var pdfjsVersion = '2.1.211';
-var pdfjsBuild = 'f92039ac';
+var pdfjsVersion = '2.1.212';
+var pdfjsBuild = '30f3ae4a';
 
 var pdfjsSharedUtil = __w_pdfjs_require__(1);
 
@@ -9888,7 +9888,7 @@ var fakeWorkerFilesLoader = null;
 {
   var useRequireEnsure = false;
 
-  if (typeof window === 'undefined') {
+  if (typeof window === 'undefined' && typeof importScripts !== 'function') {
     isWorkerDisabled = true;
 
     if (typeof require.ensure === 'undefined') {
@@ -10102,7 +10102,7 @@ function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
 
   return worker.messageHandler.sendWithPromise('GetDocRequest', {
     docId: docId,
-    apiVersion: '2.1.211',
+    apiVersion: '2.1.212',
     source: {
       data: source.data,
       url: source.url,
@@ -10964,8 +10964,8 @@ var PDFWorker = function PDFWorkerClosure() {
 
   function getMainThreadWorkerMessageHandler() {
     try {
-      if (typeof window !== 'undefined') {
-        return window.pdfjsWorker && window.pdfjsWorker.WorkerMessageHandler;
+      if (typeof self !== 'undefined') {
+        return self.pdfjsWorker && self.pdfjsWorker.WorkerMessageHandler;
       }
     } catch (ex) {}
 
@@ -10987,7 +10987,7 @@ var PDFWorker = function PDFWorkerClosure() {
 
     var loader = fakeWorkerFilesLoader || function () {
       return (0, _dom_utils.loadScript)(_getWorkerSrc()).then(function () {
-        return window.pdfjsWorker.WorkerMessageHandler;
+        return self.pdfjsWorker.WorkerMessageHandler;
       });
     };
 
@@ -11059,8 +11059,8 @@ var PDFWorker = function PDFWorkerClosure() {
           var workerSrc = _getWorkerSrc();
 
           try {
-            if (!(0, _util.isSameOrigin)(window.location.href, workerSrc)) {
-              workerSrc = createCDNWrapper(new _util.URL(workerSrc, window.location).href);
+            if (!(0, _util.isSameOrigin)(self.location.href, workerSrc)) {
+              workerSrc = createCDNWrapper(new _util.URL(workerSrc, self.location).href);
             }
 
             var worker = new Worker(workerSrc);
@@ -12169,9 +12169,9 @@ var InternalRenderTask = function InternalRenderTaskClosure() {
   return InternalRenderTask;
 }();
 
-var version = '2.1.211';
+var version = '2.1.212';
 exports.version = version;
-var build = 'f92039ac';
+var build = '30f3ae4a';
 exports.build = build;
 
 /***/ }),
